@@ -45,8 +45,11 @@ def main():
     start_point = rst[0] - view_range // 2
     end_point = rst[0] + view_range // 2 + 1
     x_value = range(start_point, end_point)
-    x_label = [(birthday_dt + datetime.timedelta(days=v)).strftime("%Y-%m-%d") for v in x_value]
-    print(x_label)
+    label_format = "%Y-%m-%d"
+    x_label = [(birthday_dt + datetime.timedelta(days=v)).strftime(label_format) for v in x_value]
+    for x in x_value:
+        cur_day =
+    y_value = [calc_biorhythms() x in x_value]
 
     # x_value = range(rst[0] - view_range // 2, rst[0] + view_range // 2 + 1)  # elapsed days
     # x_label = [(birthday_dt + datetime.timedelta(days=v)).strftime("%Y-%m-%d") for v in x_value]
