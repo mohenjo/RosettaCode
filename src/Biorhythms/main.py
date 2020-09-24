@@ -2,24 +2,17 @@ import datetime
 import math
 
 
-def _get_daydetla(date1str: str, date2str: str):
-    """두 날짜의 차이(일)를 반환합니다.
+def calc_biorhythms(birthday: datetime.datetime, targetday: datetime.datetime):
+    """바이오리듬을 구합니다.
 
     Args:
-        date1str: 날짜를 나타내는 문자열 (년월일 순  eg. "1999-06-08")
-        date2str: 날짜를 나타내는 문자열 (년월일 순  eg. "2000-12-31")
+        birthday: 시작 날짜를 나타내는 datetime 객체
+        targetday: 바이오리듬 확인 날짜를 나타내는 datetime 객체
 
     Returns:
-        int: 두 날짜의 차이(일)
+        경과 일 수, 바이오리듬(신체, 감성, 정신)으로 구성된 튜플
     """
-    dt1obj = datetime.datetime.strptime(date1str, "%Y-%m-%d")
-    dt2obj = datetime.datetime.strptime(date2str, "%Y-%m-%d")
-    td: datetime.timedelta = dt2obj - dt1obj
-    return td.days
-
-
-def get_biorhythms(birthday: str, targetday: str):
-    day_elapsed = _get_daydetla(birthday, targetday)
+    day_elapsed = (targetday - birthday).days
 
     def biovalue(circle, elaspeddays):
         return math.sin(2 * math.pi * elaspeddays / circle)
@@ -28,11 +21,16 @@ def get_biorhythms(birthday: str, targetday: str):
     emotional = biovalue(28, day_elapsed)
     mental = biovalue(33, day_elapsed)
 
-    return day_elapsed, physical, emotional, mental
+    return day_elapsed, (physical, emotional, mental)
+
+
+def get_biorhythms(birthday: str, targetday: str):
+    birthday_dt = datetime.datetime.strptime(birthday, "%Y-%m-%d")
+    targetday_dt = datetime.datetime.strptime(targetday, "%Y-%m-%d")
 
 
 if __name__ == '__main__':
     birthday = "1943-03-09"
     targetday = "1972-07-11"
-    rst = get_biorhythms(birthday, targetday)
+    rst = calc_biorhythms(birthday, targetday)
     print(rst)
