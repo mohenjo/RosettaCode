@@ -1,90 +1,71 @@
 import datetime
 import math
+import matplotlib.pyplot as plt
 
 
-def calc_biorhythms(birthday: datetime.datetime, targetday: datetime.datetime):
-    """바이오리듬을 구합니다.
+def get_biorhythms(days_elapsed: int):
+    """바이오리듬을 반환합니다.
 
     Args:
-        birthday: 시작 날짜를 나타내는 datetime 객체
-        targetday: 바이오리듬 확인 날짜를 나타내는 datetime 객체
+        days_elapsed: 출생일로부터의 경과일
 
     Returns:
-        경과 일 수, 바이오리듬(신체, 감성, 정신)으로 구성된 튜플
+        바이오리듬(신체, 감성, 정신)의 튜플
     """
-    day_elapsed = (targetday - birthday).days
 
     def biovalue(circle, elaspeddays):
-        return math.sin(2 * math.pi * elaspeddays / circle)
+        """바이오리듬 값(%)"""
+        return math.sin(2 * math.pi * elaspeddays / circle) * 100
 
-    physical = biovalue(23, day_elapsed)
-    emotional = biovalue(28, day_elapsed)
-    mental = biovalue(33, day_elapsed)
+    physical = biovalue(23, days_elapsed)
+    emotional = biovalue(28, days_elapsed)
+    mental = biovalue(33, days_elapsed)
 
-    return day_elapsed, (physical, emotional, mental)
+    return physical, emotional, mental
 
 
 def main():
-    # inputstr = input("input birthday and targetday (eg. 1991-01-01 1999-12-31): ")
-    # birthday, targetday = inputstr.split()
-    birthday = "1943-03-09"
-    targetday = "1972-07-11"
-    birthday_dt = datetime.datetime.strptime(birthday, "%Y-%m-%d")
-    targetday_dt = datetime.datetime.strptime(targetday, "%Y-%m-%d")
+    date_format = "%Y-%m-%d"
+    inputstr = input("input birthday and check day (eg. 1991-01-01 1999-12-31): ")
+    birthday, checkday = inputstr.split()
+    # birthday = "1943-03-09"  # Rosetta Code Ex
+    # checkday = "1972-07-11"  # Rosetta Code Ex
+    birthday_obj = datetime.datetime.strptime(birthday, date_format)
+    checkday_obj = datetime.datetime.strptime(checkday, date_format)
+    days_elapsed = (checkday_obj - birthday_obj).days
 
     ### CL
-    rst = calc_biorhythms(birthday_dt, targetday_dt)
+    rst = get_biorhythms(days_elapsed)
+    print(f"Days elapsed: {days_elapsed:,}")
+    phy, emo, men = (round(v) for v in rst)
+    print(f"Physical: {phy}%, Emotional: {emo}%, Mental: {men}% as of {checkday}")
 
-    print(f"Day elapsed: {rst[0]}")
-    phy, emo, men = (f"{v:.1%}" for v in rst[1])
-    print(f"Physical: {phy}, Emotional: {emo}, Mental: {men} as of {targetday}")
+    ### PLOT
+    view_range = 30  # days
+    x_value = [days_elapsed + v for v in range(- view_range // 2, view_range // 2 + 1)]
+    x_label = [(birthday_obj + datetime.timedelta(days=v)).strftime(date_format) for v in x_value]
+    bio_value = [get_biorhythms(v) for v in x_value]
+    phys = [bv[0] for bv in bio_value]
+    emos = [bv[1] for bv in bio_value]
+    mens = [bv[2] for bv in bio_value]
 
-    ### plot
-    view_range = 30
-    # elasped from birthday
-    start_point = rst[0] - view_range // 2
-    end_point = rst[0] + view_range // 2 + 1
-    x_value = range(start_point, end_point)
-    label_format = "%Y-%m-%d"
-    x_label = [(birthday_dt + datetime.timedelta(days=v)).strftime(label_format) for v in x_value]
-    for x in x_value:
-        cur_day =
-    y_value = [calc_biorhythms() x in x_value]
+    plt.plot(x_label, phys, label="PHYSICAL")
+    plt.plot(x_label, emos, label="EMOTIONAL")
+    plt.plot(x_label, mens, label="MENTAL")
 
-    # x_value = range(rst[0] - view_range // 2, rst[0] + view_range // 2 + 1)  # elapsed days
-    # x_label = [(birthday_dt + datetime.timedelta(days=v)).strftime("%Y-%m-%d") for v in x_value]
-    # x_value = []
-    # x_label = []
+    plt.axvline(checkday, -100, 100, color="r", linewidth=1, linestyle="--")
 
-    # for x in range(- view_range // 2, view_range // 2 + 1):
-    #     x_day = birthday_dt + datetime.timedelta(days=rst[0] + x)
-
-    # for eday in x_value:
-    #     cur_day = birthday_dt + datetime.timedelta(days = eday)
-    #     print(cur_day)
-
-    # elapsed_td = targetday_dt - birthday_dt
-    # x_series = []
-    # y_series = []
-    # for day in range(-20, 21):
-    #     cur_day = birthday_dt + datetime.timedelta(days=day)
-    #     # x_series.append(cur_day.strftime("%Y-%m-%d"))
-    #     x_series.append(cur_day)
-    #     y_series.append(1.2)
-    #
-    # plt.title("Biorhythms")
-    # plt.xlabel('Date')
-    # plt.ylabel('Value')
-    # plt.plot(x_series, y_series)
-    # plt.grid(True)
-    # plt.xticks(rotation=45)
-    #
-    # plt.show()
+    plt.title("Biorhythms")
+    plt.xlabel('Date')
+    plt.ylabel('Status(%)')
+    plt.xlim(x_label[0], x_label[-1])
+    plt.ylim(-100, 100)
+    plt.grid(True)
+    plt.xticks(x_label, rotation=90)
+    plt.tight_layout()
+    plt.legend()
+    plt.show()
 
 
 if __name__ == '__main__':
-    # birthday = "1943-03-09"
-    # targetday = "1972-07-11"
-    # rst = calc_biorhythms(birthday, targetday)
-    # print(rst)
     main()
