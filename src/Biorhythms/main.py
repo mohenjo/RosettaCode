@@ -1,5 +1,6 @@
 import datetime
 import math
+import matplotlib.pyplot as plt
 
 
 def calc_biorhythms(birthday: datetime.datetime, targetday: datetime.datetime):
@@ -29,8 +30,31 @@ def get_biorhythms(birthday: str, targetday: str):
     targetday_dt = datetime.datetime.strptime(targetday, "%Y-%m-%d")
 
 
+def main():
+    birthday_dt = datetime.datetime.strptime("1943-03-09", "%Y-%m-%d")
+    targetday_dt = datetime.datetime.strptime("1972-07-11", "%Y-%m-%d")
+    elapsed_td = targetday_dt - birthday_dt
+    x_series = []
+    y_series = []
+    for day in range(-20, 21):
+        cur_day = birthday_dt + datetime.timedelta(days=day)
+        # x_series.append(cur_day.strftime("%Y-%m-%d"))
+        x_series.append(cur_day)
+        y_series.append(1.2)
+
+    plt.title("Biorhythms")
+    plt.xlabel('Date')
+    plt.ylabel('Value')
+    plt.plot(x_series, y_series)
+    plt.grid(True)
+    plt.xticks(rotation=45)
+
+    plt.show()
+
+
 if __name__ == '__main__':
-    birthday = "1943-03-09"
-    targetday = "1972-07-11"
-    rst = calc_biorhythms(birthday, targetday)
-    print(rst)
+    # birthday = "1943-03-09"
+    # targetday = "1972-07-11"
+    # rst = calc_biorhythms(birthday, targetday)
+    # print(rst)
+    main()
