@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "py_biorhythms", "py_biorhythms\py_biorhythms.pyproj", "{F361A190-E866-49B8-9C1C-81BE39E98DC1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsBiorhythms", "CsBiorhythms\CsBiorhythms.csproj", "{FABF38B8-5B0B-4E38-B47C-EA3E08921273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsolePlayground", "ConsolePlayground\ConsolePlayground.csproj", "{68EB9B90-D252-4D06-B9A6-D76A369CA402}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +17,14 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F361A190-E866-49B8-9C1C-81BE39E98DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F361A190-E866-49B8-9C1C-81BE39E98DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FABF38B8-5B0B-4E38-B47C-EA3E08921273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FABF38B8-5B0B-4E38-B47C-EA3E08921273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FABF38B8-5B0B-4E38-B47C-EA3E08921273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FABF38B8-5B0B-4E38-B47C-EA3E08921273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68EB9B90-D252-4D06-B9A6-D76A369CA402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68EB9B90-D252-4D06-B9A6-D76A369CA402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68EB9B90-D252-4D06-B9A6-D76A369CA402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68EB9B90-D252-4D06-B9A6-D76A369CA402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
