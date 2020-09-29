@@ -26,6 +26,25 @@ namespace CsBiorhythms
         }
 
         /// <summary>
+        /// 바이오리듬의 종류
+        /// </summary>
+        public enum BioType
+        {
+            /// <summary>
+            /// 신체
+            /// </summary>
+            Physical,
+            /// <summary>
+            /// 감성
+            /// </summary>
+            Emotional,
+            /// <summary>
+            /// 지성
+            /// </summary>
+            Mental
+        }
+
+        /// <summary>
         /// 생일
         /// </summary>
         public DateTime Birthday { get; private set; }
@@ -39,6 +58,23 @@ namespace CsBiorhythms
         /// 생일로부터 바이오리듬 확인일까지의 경과일 수
         /// </summary>
         public int DaysElapsed { get; private set; }
+
+
+        /// <summary>
+        /// 현재 인스턴스의 바이오리듬 값을 반환합니다.
+        /// </summary>
+        /// <returns></returns>
+        public Dictionary<BioType, double> GetBiorhytms()
+        {
+            Dictionary<BioType, double> result = new Dictionary<BioType, double>
+            {
+                { BioType.Physical, GetPhysicalValue(DaysElapsed) },
+                { BioType.Emotional, GetEmotionalValue(DaysElapsed) },
+                { BioType.Mental, GetEmotionalValue(DaysElapsed) }
+            };
+
+            return result;
+        }
 
         /// <summary>
         /// 바이오리듬 값을 반환합니다.
