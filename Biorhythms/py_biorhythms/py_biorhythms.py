@@ -10,7 +10,7 @@ def get_biorhythms(days_elapsed: int):
         days_elapsed: 출생일로부터의 경과일
 
     Returns:
-        바이오리듬(신체, 감성, 정신)의 튜플
+        바이오리듬(신체, 감성, 지성)의 튜플
     """
 
     def biovalue(circle, elaspeddays):

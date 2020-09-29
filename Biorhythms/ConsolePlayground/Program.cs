@@ -14,6 +14,7 @@ namespace ConsolePlayground
             DateTime birthday = new DateTime(1943, 03, 09);
             DateTime checkday = new DateTime(1972, 07, 11);
             Biorhythm bio = new Biorhythm(birthday, checkday);
+            
 
             Console.WriteLine(bio.DaysElapsed);
         }
