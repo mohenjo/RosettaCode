@@ -74,7 +74,7 @@
             // 
             // buttonShowChart
             // 
-            this.buttonShowChart.Location = new System.Drawing.Point(699, 14);
+            this.buttonShowChart.Location = new System.Drawing.Point(941, 20);
             this.buttonShowChart.Name = "buttonShowChart";
             this.buttonShowChart.Size = new System.Drawing.Size(89, 49);
             this.buttonShowChart.TabIndex = 5;
@@ -88,13 +88,13 @@
             this.chartBiorhythms.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chartBiorhythms.Legends.Add(legend1);
-            this.chartBiorhythms.Location = new System.Drawing.Point(12, 80);
+            this.chartBiorhythms.Location = new System.Drawing.Point(12, 75);
             this.chartBiorhythms.Name = "chartBiorhythms";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chartBiorhythms.Series.Add(series1);
-            this.chartBiorhythms.Size = new System.Drawing.Size(774, 358);
+            this.chartBiorhythms.Size = new System.Drawing.Size(1021, 547);
             this.chartBiorhythms.TabIndex = 6;
             this.chartBiorhythms.Text = "chart1";
             // 
@@ -102,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1042, 633);
             this.Controls.Add(this.chartBiorhythms);
             this.Controls.Add(this.buttonShowChart);
             this.Controls.Add(this.dateTimePickerCheckDay);

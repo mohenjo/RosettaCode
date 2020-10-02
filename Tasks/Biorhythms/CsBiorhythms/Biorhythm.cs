@@ -70,7 +70,7 @@ namespace CsBiorhythms
             {
                 { BioType.Physical, GetPhysicalValue(DaysElapsed) },
                 { BioType.Emotional, GetEmotionalValue(DaysElapsed) },
-                { BioType.Mental, GetEmotionalValue(DaysElapsed) }
+                { BioType.Mental, GetMentalvalue(DaysElapsed) }
             };
 
             return result;
