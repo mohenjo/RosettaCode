@@ -12,6 +12,10 @@ namespace CsBiorhythms
 {
     public partial class FormMain : Form
     {
+        private const int VIEW_DAYS_SPAN = 40; // 바이오리듬 차트를 나타낼 범위(일)
+
+        private List<DateTime> SeriesX = new List<DateTime>();
+
         public FormMain()
         {
             InitializeComponent();
