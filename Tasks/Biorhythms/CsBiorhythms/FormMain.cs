@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace CsBiorhythms
 {
@@ -14,7 +15,9 @@ namespace CsBiorhythms
     {
         private const int VIEW_DAYS_SPAN = 40; // 바이오리듬 차트를 나타낼 범위(일)
 
-        private List<DateTime> SeriesX = new List<DateTime>();
+        private List<string> SeriesX = new List<string>();
+
+        private List<Dictionary<Biorhythm.BioType, double>> SeriesY = new List<Dictionary<Biorhythm.BioType, double>>();
 
         public FormMain()
         {
@@ -29,13 +32,28 @@ namespace CsBiorhythms
 
         private void Initialize()
         {
+            InitDaySelection();
+            InitChar();
         }
 
         private void buttonShowChart_Click(object sender, EventArgs e)
         {
+            var dayDiff = dateTimePickerCheckDay.Value - dateTimePickerBirthday.Value;
+            Debug.WriteLine(dayDiff);
+            if (dayDiff.Days < VIEW_DAYS_SPAN /2)
+            {
+                MessageBox.Show($"확인 날짜와 생일 간에는 {VIEW_DAYS_SPAN / 2}이상의 차이(일)가 있어야 합니다.", "날짜 입력 오류", MessageBoxButtons.OK);
+                InitDaySelection();
+            }
             this.Birthday = dateTimePickerBirthday.Value;
             this.CheckDay = dateTimePickerCheckDay.Value;
             InitChar();
+            InitDateSet();
+        }
+
+        private void InitDaySelection()
+        {
+            dateTimePickerCheckDay.Value = dateTimePickerBirthday.Value.AddDays(VIEW_DAYS_SPAN / 2);
         }
 
         private void InitChar()
@@ -49,8 +67,16 @@ namespace CsBiorhythms
 
         private void InitDateSet()
         {
-            DateTime BeginDate = CheckDay.AddDays(-VIEW_DAYS_SPAN / 2);
-            DateTime EndDate = CheckDay.AddDays(VIEW_DAYS_SPAN / 2);
+            this.SeriesX = new List<string>();
+            this.SeriesY = new List<Dictionary<Biorhythm.BioType, double>>();
+            for (int daysDiff = -VIEW_DAYS_SPAN/2; daysDiff <= VIEW_DAYS_SPAN /2; daysDiff++)
+            {
+                var currentDay = CheckDay.AddDays(daysDiff);
+                SeriesX.Add(currentDay.ToString("yy-MM-dd"));
+                var bioOfcurrentDay = new Biorhythm(this.Birthday, currentDay);
+                SeriesY.Add(bioOfcurrentDay.GetBiorhytms());
+            }
+            
         }
     }
 }

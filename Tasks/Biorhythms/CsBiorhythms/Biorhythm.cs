@@ -19,9 +19,9 @@ namespace CsBiorhythms
             this.CheckDay = checkday;
 
             DaysElapsed = (checkday - birthday).Days;
-            if (DaysElapsed < 15)
+            if (DaysElapsed < 0)
             {
-                throw new ArgumentException("생일과 최소 15일 이상 차이나는 날짜를 체크해야 합니다.");
+                throw new ArgumentException("생일 이전 날짜는 선택할 수 없습니다.");
             }
         }
 
