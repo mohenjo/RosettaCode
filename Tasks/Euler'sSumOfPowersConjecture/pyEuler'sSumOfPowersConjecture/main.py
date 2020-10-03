@@ -3,14 +3,17 @@ def main():
     print(rst)
 
 def bf_cal():
-    for x0 in range(1, 251):
-        print(f"0..{x0}..251")
-        for x1 in range(x0,251):
-            for x2 in range(x1,251):
-                for x3 in range(x2,251):
-                    y = (x0 ** 5 + x1 ** 5 + x2 ** 5 + x3 ** 5) ** (1 / 5)
-                    if y == int(y) and y > x3 and is_exclusive(x0, x1, x2, x3, y):
-                       return x0, x1, x2, x3, y
+    max_n = 250
+    pwr_pool = [n ** 5 for n in range(max_n)]
+    for x0 in range(1, max_n):
+        print(f"processing {x0} in (0..250)")
+        for x1 in range(1,x0):
+            for x2 in range(1,x1):
+                for x3 in range(1 ,x2):
+                    y_pwr5 = sum(pwr_pool[i] for i in (x0, x1, x2, x3))
+                    y = y_pwr5 ** (1/5)
+                    if y_pwr5 in pwr_pool and y == int(y) and y not in (x0, x1, x2, x3):
+                        return x0, x1, x2, x3, y
                        
 
 def is_exclusive(*args):
