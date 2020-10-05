@@ -34,13 +34,13 @@ def main():
     checkday_obj = datetime.datetime.strptime(checkday, date_format)
     days_elapsed = (checkday_obj - birthday_obj).days
 
-    ### CL
+    # --- CL ---
     rst = get_biorhythms(days_elapsed)
     print(f"Days elapsed: {days_elapsed:,}")
     phy, emo, men = (round(v) for v in rst)
     print(f"Physical: {phy}%, Emotional: {emo}%, Mental: {men}% as of {checkday}")
 
-    ### PLOT
+    # --- PLOT ---
     view_range = 30  # days
     x_value = [days_elapsed + v for v in range(- view_range // 2, view_range // 2 + 1)]
     x_label = [(birthday_obj + datetime.timedelta(days=v)).strftime(date_format) for v in x_value]
