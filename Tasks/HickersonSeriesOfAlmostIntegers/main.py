@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+
 def main():
     max_n = 18
 
@@ -10,6 +11,7 @@ def main():
         expr = f"h({n}) = {rst[n]:0.3f} : is almost integer? {is_almost_integer(rst[n])}"
         print(expr)
 
+
 def get_hickerson_series(max_n: int):
     factorials = [1]
     series = [None]
@@ -18,6 +20,7 @@ def get_hickerson_series(max_n: int):
         eq = factorials[n] / (2 * Decimal(2).ln() ** (n + 1))
         series.append(eq)
     return series
+
 
 if __name__ == "__main__":
     main()
