@@ -1,18 +1,20 @@
 def main():
-    maxlength = 0
-    maxlength_seq = None
-    maxseed = None
-    for testnum in range(0, 1_000_000 + 1):
+    uptoval = 1_000_000
+    len_lst = [0 for _ in range(0, uptoval + 1)]
+    print("calculating...", end='')
+    for testnum in range(0, uptoval + 1):
         foo = SummarizeAndSaySeq(testnum)
-        if foo.sequence_length > maxlength:
-            maxseed = testnum
-            maxlength = foo.sequence_length
-            maxlength_seq = foo.sequence
-            print(f"{maxseed} has length {maxlength}.")
-    print()
-    print(f"{maxseed} has the longest sequence length {maxlength} (found first):")
-    for e in maxlength_seq:
-        print(e)
+        len_lst[testnum] = foo.sequence_length
+    maxlength = max(len_lst)
+    print("ok.\n")
+    for i, v in enumerate(len_lst):
+        if v == maxlength:
+            foo = SummarizeAndSaySeq(i)
+            print(f"seed value with max sequence length {foo.sequence_length}: {i}")
+            print("sequence:")
+            for e in foo.sequence:
+                print(e)
+            print()
 
 
 class SummarizeAndSaySeq:
@@ -55,4 +57,3 @@ def summarize_and_say(anum: int) -> int:
 
 if __name__ == '__main__':
     main()
-
