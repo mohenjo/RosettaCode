@@ -10,7 +10,7 @@ def main():
             maxlength_seq = foo.sequence
             print(f"{maxseed} has length {maxlength}.")
     print()
-    print(f"{maxseed} has the longest sequence length {maxlength}:")
+    print(f"{maxseed} has the longest sequence length {maxlength} (found first):")
     for e in maxlength_seq:
         print(e)
 
@@ -55,3 +55,4 @@ def summarize_and_say(anum: int) -> int:
 
 if __name__ == '__main__':
     main()
+
